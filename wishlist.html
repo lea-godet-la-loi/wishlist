@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La wishlist de Noël de Léa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --vin: #2b0a15;
+      --vin-clair: #4a1626;
+      --ivoire: #f5eddc;
+      --or: #d6b66b;
+      --or-doux: rgba(214, 182, 107, 0.4);
+      --serif: "Bodoni Moda", "Didot", "Georgia", serif;
+      --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--vin);
+      background-image: radial-gradient(ellipse 90% 55% at 50% 0%, #5b1a2f 0%, transparent 70%);
+      background-repeat: no-repeat;
+      color: var(--ivoire);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ---------- En-tête ---------- */
+    .hero {
+      text-align: center;
+      padding: 120px 24px 0;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    .hero .sous-titre {
+      margin: 22px auto 0;
+      max-width: 44ch;
+      font-size: 1.05rem;
+      opacity: 0.8;
+    }
+
+    /* ---------- Compte à rebours ---------- */
+    .decompte {
+      display: flex;
+      justify-content: center;
+      margin-top: 64px;
+    }
+
+    .unite {
+      padding: 0 clamp(14px, 4vw, 48px);
+      border-left: 1px solid var(--or-doux);
+    }
+    .unite:first-child { border-left: none; }
+
+    .nombre {
+      display: block;
+      min-width: 2ch;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2.6rem, 8vw, 5.5rem);
+      line-height: 1;
+      color: var(--or);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .unite .nom {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+    }
+
+    .message-noel {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      color: var(--or);
+    }
+
+    .ornement {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      max-width: 420px;
+      margin: 64px auto 0;
+      color: var(--or);
+    }
+    .ornement::before,
+    .ornement::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--or-doux);
+    }
+
+    /* ---------- Les articles : 3 par ligne ---------- */
+    main {
+      max-width: 1120px;
+      margin: 72px auto 0;
+      padding: 0 32px 140px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 84px 44px;
+    }
+
+    .article {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .photo {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      background: var(--vin-clair);
+      outline: 1px solid var(--or-doux);
+      outline-offset: 10px;
+      margin: 10px 10px 34px;
+      overflow: hidden;
+    }
+
+    .photo::after {
+      content: "✦";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--or-doux);
+      font-size: 1.6rem;
+    }
+
+    .photo img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ligne {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    .ligne h2 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 1.4rem;
+      line-height: 1.2;
+    }
+
+    .prix {
+      font-weight: 500;
+      color: var(--or);
+      white-space: nowrap;
+    }
+
+    .description {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    /* Le "pourquoi" ressemble à une étiquette cadeau */
+    .etiquette {
+      position: relative;
+      margin-top: 22px;
+      padding: 30px 22px 20px;
+      background: var(--ivoire);
+      color: #3b1420;
+      font-size: 0.93rem;
+      font-weight: 400;
+      clip-path: polygon(24px 0, 100% 0, 100% 100%, 0 100%, 0 24px);
+    }
+
+    .etiquette::before {
+      content: "";
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--vin);
+    }
+
+    .etiquette .titre {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .lien {
+      margin-top: 24px;
+      align-self: flex-start;
+      padding: 10px 24px;
+      border: 1px solid var(--or);
+      color: var(--or);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.25s, color 0.25s;
+    }
+    .lien:hover { background: var(--or); color: var(--vin); }
+    .lien:focus-visible { outline: 2px solid var(--ivoire); outline-offset: 3px; }
+
+    /* ---------- Neige ---------- */
+    .flocon {
+      position: fixed;
+      top: -30px;
+      color: var(--ivoire);
+      pointer-events: none;
+      user-select: none;
+      z-index: 20;
+      animation: tomber linear infinite;
+    }
+
+    @keyframes tomber {
+      from { transform: translate3d(0, -5vh, 0); }
+      to   { transform: translate3d(var(--derive, 40px), 110vh, 0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .flocon { display: none; }
+    }
+
+    /* ---------- Tablette et mobile ---------- */
+    @media (max-width: 900px) {
+      main { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 72px 36px; }
+      .hero { padding-top: 88px; }
+    }
+    @media (max-width: 560px) {
+      main { grid-template-columns: minmax(0, 1fr); padding: 0 28px 100px; }
+      .hero { padding-top: 64px; }
+      .decompte { margin-top: 48px; }
+      .unite .nom { font-size: 0.75rem; }
+    }
+    /* ---------- Cadeau déjà choisi ---------- */
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .actions .lien { margin-top: 0; }
+ 
+    .offrir {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 10px 24px;
+      border: 1px solid var(--or);
+      background: var(--or);
+      color: var(--vin);
+      cursor: pointer;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .offrir:hover { background: var(--ivoire); border-color: var(--ivoire); }
+    .offrir:focus-visible { outline: 2px solid var(--ivoire); outline-offset: 3px; }
+ 
+    .annuler {
+      display: none;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      color: var(--ivoire);
+      opacity: 0.7;
+      background: none;
+      border: none;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .annuler:hover { opacity: 1; }
+ 
+    .etat {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      place-items: center;
+    }
+    .etat span {
+      padding: 10px 26px;
+      background: var(--vin);
+      border: 1px solid var(--or);
+      color: var(--or);
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.2rem;
+    }
+ 
+    .article.choisi .etat { display: grid; }
+    .article.choisi .photo img { filter: grayscale(1); opacity: 0.35; }
+    .article.choisi .ligne,
+    .article.choisi .description,
+    .article.choisi .etiquette { opacity: 0.5; }
+    .article.choisi .offrir { display: none; }
+    .article.choisi .annuler { display: inline; }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>La wishlist de Noël de Léa</h1>
+    <p class="sous-titre">Mes idées de cadeaux pour ce Noël 2026.</p>
+
+    <div class="decompte" id="decompte" role="timer" aria-label="Temps restant avant Noël">
+      <div class="unite"><span class="nombre" id="d-jours">--</span><span class="nom">jours</span></div>
+      <div class="unite"><span class="nombre" id="d-heures">--</span><span class="nom">heures</span></div>
+      <div class="unite"><span class="nombre" id="d-minutes">--</span><span class="nom">minutes</span></div>
+      <div class="unite"><span class="nombre" id="d-secondes">--</span><span class="nom">secondes</span></div>
+    </div>
+
+    <div class="ornement" aria-hidden="true">✦</div>
+  </header>
+
+  <main>
+    <!--
+      ============================================================
+      POUR AJOUTER UN ARTICLE : copie un bloc <article> en entier
+      (de <article ...> jusqu'à </article>), colle-le à la suite,
+      puis change l'image, le nom, le prix, la description, le
+      "pourquoi" et le lien.
+
+      IMAGES : mets tes photos dans un dossier "images" à côté de
+      ce fichier, puis écris le chemin, par ex. images/casque.jpg
+      Les photos s'affichent en format portrait (4/5).
+      ============================================================
+    -->
+
+    <article class="article">
+      <div class="photo">
+        <img src="images/fameparfum.avif" alt="Nom de l'article 1" onerror="this.remove()">
+      </div>
+      <div class="ligne">
+        <h2>Fame parfum</h2>
+        <span class="prix">149 €</span>
+      </div>
+      <p class="description">Parfum fame de chez Rabanne.</p>
+      <div class="etiquette">
+        <p class="titre">Pourquoi je le veux</p>
+        <p>Mon parfum est presque fini et je veux continuer à sentir bon.</p>
+      </div>
+      <a class="lien" href="https://www.sephora.fr/p/fame-parfum---extrait-de-parfum-696819.html" target="_blank" rel="noopener">Voir l'article</a>
+    </article>
+
+    <article class="article">
+      <div class="photo">
+        <img src="images/gerard.webp" alt="Nom de l'article 2" onerror="this.remove()">
+      </div>
+      <div class="ligne">
+        <h2>Sac à main en cuir</h2>
+        <span class="prix">365 €</span>
+      </div>
+      <p class="description">Magnifique sac à main Gerard Darel</p>
+      <div class="etiquette">
+        <p class="titre">Pourquoi je le veux</p>
+        <p>Un nouveau sac à main pour pouvoir mettre tous mes cours</p>
+      </div>
+      <a class="lien" href="https://gerarddarel.com/products/sac-24h_dcs01h4016300?pr_prod_strat=similar&pr_rec_id=24b09c07a&pr_rec_pid=9926791070037&pr_ref_pid=9398763651413&pr_seq=uniform" target="_blank" rel="noopener">Voir l'article</a>
+    </article>
+
+    <article class="article">
+      <div class="photo">
+        <img src="images/ugg.jpeg" alt="Nom de l'article 3" onerror="this.remove()">
+      </div>
+      <div class="ligne">
+        <h2>Tasman II</h2>
+        <span class="prix">139 €</span>
+      </div>
+      <p class="description">Sublime Tasman II, Dusted Cocoa</p>
+      <div class="etiquette">
+        <p class="titre">Pourquoi je le veux</p>
+        <p>Pour avoir chaud aux pieds cet hiver</p>
+      </div>
+      <a class="lien" href="https://www.ugg.com/eu/fr/fr/tasman%C2%A0ii/199727024656.html?utm_source=google&utm_medium=cpc&utm_campaign=UGG%2BBD%2BWOMENS+SLIPPERS%2BHIGH%2BSMART%2BFR%2BFRA%2BPMAX&src=pmax&gclsrc=aw.ds&gad_source=1&gad_campaignid=20185811441&gbraid=0AAAAADle8vM5GPlLSK-QlUG-w-J7wJusF&dwvar_1174470_color=DDC&dwvar_1174470_size=10" target="_blank" rel="noopener">Voir l'article</a>
+    </article>
+
+    <article class="article">
+      <div class="photo">
+        <img src="images/lvv.webp" alt="Nom de l'article 4" onerror="this.remove()">
+      </div>
+      <div class="ligne">
+        <h2>Sac Speedy 30</h2>
+        <span class="prix">1700 €</span>
+      </div>
+      <p class="description">exceptionnel sac speedy 30 monogram</p>
+      <div class="etiquette">
+        <p class="titre">Pourquoi je le veux</p>
+        <p>Grand sac très pratique dans la vie de tous les jours.</p>
+      </div>
+      <a class="lien" href="https://fr.louisvuitton.com/fra-fr/produits/sac-speedy-bandouliere-30-monogram-nvprod5320020v/M46980?utm_source=google&utm_medium=cpc&utm_campaign=LV_FLG_FRA_ALWON_MIXT_MULTI_OnGoing_EC_SHOP_GSHO_MUL_FRA_EUR_NOMT_LOW_PRICE_TOP&gad_source=1&gad_campaignid=16913811317&gbraid=0AAAAAD8BEVF5ykYVZVfDX5rHNLKG-doJP" target="_blank" rel="noopener">Voir l'article</a>
+    </article>
+
+    <article class="article">
+      <div class="photo">
+        <img src="images/livre.jpeg" alt="Nom de l'article 5" onerror="this.remove()">
+      </div>
+      <div class="ligne">
+        <h2>Des livres</h2>
+        <span class="prix">~10-20 €</span>
+      </div>
+      <p class="description">livres policier/thriller/romance</p>
+      <div class="etiquette">
+        <p class="titre">Pourquoi je le veux</p>
+        <p>J'aimerais de nouveaux livres pour étayer ma culture générale et réduire mon temps d'écran</p>
+      </div>
+      <a class="lien" href="https://www.fnac.com/a21554020/La-Famille-Du-Tueur-En-Serie-La-femme-du-serial-killer-Alice-Hunter" target="_blank" rel="noopener">Voir l'article</a>
+    </article>
+
+    <article class="article">
+      <div class="photo">
+        <img src="images/poudre.avif" alt="Nom de l'article 6" onerror="this.remove()">
+      </div>
+      <div class="ligne">
+        <h2>Poudre charlotte tilbury</h2>
+        <span class="prix">55 €</span>
+      </div>
+      <p class="description">Airbrush Flawless Finish - Poudre matifiante</p>
+      <div class="etiquette">
+        <p class="titre">Pourquoi je le veux</p>
+        <p>car c'est un de mes produits préféré et qu'il est presque fini..(teinte medium 2)</p>
+      </div>
+      <a class="lien" href="https://www.sephora.fr/p/airbrush-flawless-finish---poudre-matifiante-766498.html?utm_source=google&utm_medium=cpc&utm_campaign=SephoraEUR_SR_FRA_PLA-PMAX-Maquillage-TOP-Exclusive_GEN_OTH_OGOING_EC_SHOP_GSMS_CRD_FRA_EUR_NAPP&utm_term=&gad_source=1&gad_campaignid=22192954989&gbraid=0AAAAAoL2wkH8hMzyuiUhNLXfgfssOZYnm&gclid=Cj0KCQiA-8XXBhDaARIsADnEOrAXhGSc0_aKCbbmgAxoganrRX_60eXXeDWynGMJqD5vUZKAlj7aOagaAuq6EALw_wcB" target="_blank" rel="noopener">Voir l'article</a>
+    </article>
+
+    <article class="article">
+      <div class="photo">
+        <img src="images/bronzer.avif" alt="Nom de l'article 5" onerror="this.remove()">
+      </div>
+      <div class="ligne">
+        <h2>Bronzer too faced</h2>
+        <span class="prix">39,90 €</span>
+      </div>
+      <p class="description">Chocolate Soleil Bronzer - Poudre Bronzante Floutante Fini Mat</p>
+      <div class="etiquette">
+        <p class="titre">Pourquoi je le veux</p>
+        <p>à défaut d'aller aux maldives pour avoir l'air bronzée</p>
+      </div>
+      <a class="lien" href="https://www.sephora.fr/p/chocolate-soleil-bronzer---poudre-bronzante-floutante-fini-mat-P1000212993.html" target="_blank" rel="noopener">Voir l'article</a>
+    </article>
+
+    <article class="article">
+      <div class="photo">
+        <img src="images/mexi.webp" alt="Nom de l'article 5" onerror="this.remove()">
+      </div>
+      <div class="ligne">
+        <h2>Un financement</h2>
+        <span class="prix"></span>
+      </div>
+      <p class="description">Contribution à mes économies</p>
+      <div class="etiquette">
+        <p class="titre">Pourquoi je le veux</p>
+        <p>pour financer mon voyage universitaire et avoir l'opportunité de voygaer au sein du continent où j'irai</p>
+      </div>
+      <a class="lien" href="https://fr.wikipedia.org/wiki/Mexique" target="_blank" rel="noopener">Voir l'article</a>
+    </article>
+
+    <article class="article">
+      <div class="photo">
+        <img src="images/audi.webp" alt="Nom de l'article 5" onerror="this.remove()">
+      </div>
+      <div class="ligne">
+        <h2>Audi A1</h2>
+        <span class="prix">300 € (LOA)</span>
+      </div>
+      <p class="description">Audi A1 Sportback finition S Line</p>
+      <div class="etiquette">
+        <p class="titre">Pourquoi je le veux</p>
+        <p>Je la veux parce que c’est ma liberté : arriver à l’heure chez mes copines, en stage, et vous rendre votre liberté en vous rendant le capture. Elle est compacte, facile à garer, économe et garde sa valeur : c’est un vrai placement</p>
+      </div>
+      <a class="lien" href="https://www.audi.fr/fr/article/audi-a1-occasion/" target="_blank" rel="noopener">Voir l'article</a>
+    </article>
+
+    <article class="article">
+      <div class="photo">
+        <img src="images/short.jpeg" alt="Nom de l'article 5" onerror="this.remove()">
+      </div>
+      <div class="ligne">
+        <h2>Short de sport</h2>
+        <span class="prix">39,99 €</span>
+      </div>
+      <p class="description">Short Sculpt Scrunch (léopard noir)</p>
+      <div class="etiquette">
+        <p class="titre">Pourquoi je le veux</p>
+        <p>Pour avoir un super outfit au sport</p>
+      </div>
+      <a class="lien" href="https://teveo.com/fr-fr/products/short-contrastline-sculpt-scrunch-leopard-noir?_su_rec=yCzh94x04XYxUS27BGfSNJIULNdJeBzhbNjeQISnWPNBEM7IzejXzRn29MbPiSvNIvqXgHePW8JgdFwcm_unSWkjfdOakjXDth_SzPUlvdUQ0ec94MPBOi5S_7sSK3k6tb2GD1HD1FF853B1Y8hAeSBeAyMTW2nsW7MsOxhVc9emDwWSutynleQK3UO4NH8cVhprGrHATEfESXT8X7oOKIYD5WXcgjVxEbdVptHOmIuK9SbFo0b_A-GruJu-s-CF5V-_TbcYnet19TpuHnXwMRrrMQ&_su_rec_id=c8110fb8-9d59-407c-8314-006e9cb466b5-1794233434" target="_blank" rel="noopener">Voir l'article</a>
+    </article>
+
+    
+
+  </main>
+
+  <script>
+    // ----- Compte à rebours en direct jusqu'à Noël -----
+    (function () {
+      var zone = document.getElementById("decompte");
+      var j = document.getElementById("d-jours");
+      var h = document.getElementById("d-heures");
+      var m = document.getElementById("d-minutes");
+      var s = document.getElementById("d-secondes");
+
+      function deux(n) { return n < 10 ? "0" + n : "" + n; }
+
+      function maj() {
+        var maintenant = new Date();
+        var annee = maintenant.getFullYear();
+        var noel = new Date(annee, 11, 25, 0, 0, 0);
+        var fin = new Date(annee, 11, 26, 0, 0, 0);
+
+        // Le jour de Noël : message spécial
+        if (maintenant >= noel && maintenant < fin) {
+          zone.innerHTML = '<p class="message-noel">Joyeux Noël !</p>';
+          clearInterval(minuteur);
+          return;
+        }
+        // Après Noël : on vise le Noël de l'année suivante
+        if (maintenant >= fin) { noel = new Date(annee + 1, 11, 25, 0, 0, 0); }
+
+        var reste = Math.floor((noel - maintenant) / 1000);
+        j.textContent = Math.floor(reste / 86400);
+        h.textContent = deux(Math.floor((reste % 86400) / 3600));
+        m.textContent = deux(Math.floor((reste % 3600) / 60));
+        s.textContent = deux(reste % 60);
+      }
+
+      var minuteur = setInterval(maj, 1000);
+      maj();
+    })();
+
+    // ----- Neige : change 80 pour avoir plus ou moins de flocons -----
+    (function () {
+      var nombre = 80;
+      var formes = ["❄", "❅", "•", "•"];
+      for (var i = 0; i < nombre; i++) {
+        var f = document.createElement("span");
+        f.className = "flocon";
+        f.textContent = formes[Math.floor(Math.random() * formes.length)];
+        f.style.left = (Math.random() * 100) + "vw";
+        f.style.fontSize = (7 + Math.random() * 16) + "px";
+        f.style.opacity = (0.25 + Math.random() * 0.55).toFixed(2);
+        f.style.animationDuration = (9 + Math.random() * 16) + "s";
+        f.style.animationDelay = (-Math.random() * 25) + "s";
+        f.style.setProperty("--derive", (Math.random() * 120 - 60).toFixed(0) + "px");
+        document.body.appendChild(f);
+      }
+    })();
+  </script>
+  <script type="module">
+    // ============================================================
+    // CADEAUX DÉJÀ CHOISIS (Firebase)
+    // Coll ici les valeurs que Firebase te donne, entre les
+    // guillemets. Tant que ce n'est pas rempli, le site marche
+    // normalement mais sans les boutons "Je l'offre".
+    // ============================================================
+    const firebaseConfig = {
+      apiKey: "const firebaseConfig = {
+  apiKey: "AIzaSyB66e9gjyqjNOR_froTdTyeEoGiEw_JXrk",
+  authDomain: "wishlist-lea.firebaseapp.com",
+  projectId: "wishlist-lea",
+  storageBucket: "wishlist-lea.firebasestorage.app",
+  messagingSenderId: "961740782932",
+  appId: "1:961740782932:web:0b22e6c98793bbf2361cc1"
+}",
+      authDomain: "const firebaseConfig = {
+  apiKey: "AIzaSyB66e9gjyqjNOR_froTdTyeEoGiEw_JXrk",
+  authDomain: "wishlist-lea.firebaseapp.com",
+  projectId: "wishlist-lea",
+  storageBucket: "wishlist-lea.firebasestorage.app",
+  messagingSenderId: "961740782932",
+  appId: "1:961740782932:web:0b22e6c98793bbf2361cc1"
+}",
+      projectId: "const firebaseConfig = {
+  apiKey: "AIzaSyB66e9gjyqjNOR_froTdTyeEoGiEw_JXrk",
+  authDomain: "wishlist-lea.firebaseapp.com",
+  projectId: "wishlist-lea",
+  storageBucket: "wishlist-lea.firebasestorage.app",
+  messagingSenderId: "961740782932",
+  appId: "1:961740782932:web:0b22e6c98793bbf2361cc1"
+}",
+      storageBucket: "const firebaseConfig = {
+  apiKey: "AIzaSyB66e9gjyqjNOR_froTdTyeEoGiEw_JXrk",
+  authDomain: "wishlist-lea.firebaseapp.com",
+  projectId: "wishlist-lea",
+  storageBucket: "wishlist-lea.firebasestorage.app",
+  messagingSenderId: "961740782932",
+  appId: "1:961740782932:web:0b22e6c98793bbf2361cc1"
+}",
+      messagingSenderId: "const firebaseConfig = {
+  apiKey: "AIzaSyB66e9gjyqjNOR_froTdTyeEoGiEw_JXrk",
+  authDomain: "wishlist-lea.firebaseapp.com",
+  projectId: "wishlist-lea",
+  storageBucket: "wishlist-lea.firebasestorage.app",
+  messagingSenderId: "961740782932",
+  appId: "1:961740782932:web:0b22e6c98793bbf2361cc1"
+}",
+      appId: "const firebaseConfig = {
+  apiKey: "AIzaSyB66e9gjyqjNOR_froTdTyeEoGiEw_JXrk",
+  authDomain: "wishlist-lea.firebaseapp.com",
+  projectId: "wishlist-lea",
+  storageBucket: "wishlist-lea.firebasestorage.app",
+  messagingSenderId: "961740782932",
+  appId: "1:961740782932:web:0b22e6c98793bbf2361cc1"
+}"
+    };
+ 
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+ 
+    function demarrer() {
+      if (firebaseConfig.apiKey === "const firebaseConfig = {
+  apiKey: "AIzaSyB66e9gjyqjNOR_froTdTyeEoGiEw_JXrk",
+  authDomain: "wishlist-lea.firebaseapp.com",
+  projectId: "wishlist-lea",
+  storageBucket: "wishlist-lea.firebasestorage.app",
+  messagingSenderId: "961740782932",
+  appId: "1:961740782932:web:0b22e6c98793bbf2361cc1"
+}") {
+        console.log("Firebase pas encore configuré : boutons désactivés.");
+        return;
+      }
+ 
+      // Mode surprise : ouvre ton site une fois avec ?moi=oui à la fin de l'adresse
+      // et tu ne verras plus ni boutons ni cadeaux choisis. ?moi=non pour annuler.
+      var params = new URLSearchParams(location.search);
+      try {
+        if (params.get("moi") === "oui") localStorage.setItem("lea", "1");
+        if (params.get("moi") === "non") localStorage.removeItem("lea");
+      } catch (e) {}
+      var estLea = false;
+      try { estLea = localStorage.getItem("lea") === "1"; } catch (e) {}
+      if (estLea) return;
+ 
+      var db = getFirestore(initializeApp(firebaseConfig));
+ 
+      function identifiant(texte) {
+        return texte.toLowerCase()
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "article";
+      }
+ 
+      function enregistrer(id, valeur) {
+        setDoc(doc(db, "cadeaux", id), { choisi: valeur }).catch(function () {
+          alert("Oups, ça n'a pas marché. Réessaie dans un instant.");
+        });
+      }
+ 
+      var articles = document.querySelectorAll(".article");
+      var liste = [];
+ 
+      articles.forEach(function (article) {
+        var nom = article.querySelector("h2").textContent.trim();
+        var id = article.dataset.id || identifiant(nom);
+ 
+        // Bandeau "Déjà choisi" sur la photo
+        var etat = document.createElement("div");
+        etat.className = "etat";
+        etat.innerHTML = "<span>Déjà choisi</span>";
+        article.querySelector(".photo").appendChild(etat);
+ 
+        // Boutons à côté du lien d'achat
+        var actions = document.createElement("div");
+        actions.className = "actions";
+        var lien = article.querySelector(".lien");
+        if (lien) {
+          lien.parentNode.insertBefore(actions, lien);
+          actions.appendChild(lien);
+        } else {
+          article.appendChild(actions);
+        }
+ 
+        var offrir = document.createElement("button");
+        offrir.type = "button";
+        offrir.className = "offrir";
+        offrir.textContent = "Je l'offre";
+        offrir.addEventListener("click", function () {
+          if (confirm("Tu veux offrir « " + nom + " » à Léa ?\nLes autres verront qu'il est déjà pris.")) {
+            enregistrer(id, true);
+          }
+        });
+ 
+        var annuler = document.createElement("button");
+        annuler.type = "button";
+        annuler.className = "annuler";
+        annuler.textContent = "Annuler";
+        annuler.addEventListener("click", function () {
+          if (confirm("Remettre « " + nom + " » comme disponible ?")) {
+            enregistrer(id, false);
+          }
+        });
+ 
+        actions.appendChild(offrir);
+        actions.appendChild(annuler);
+        liste.push({ id: id, article: article });
+      });
+ 
+      // Mise à jour en direct quand quelqu'un choisit un cadeau
+      onSnapshot(collection(db, "cadeaux"), function (snap) {
+        var choisis = {};
+        snap.forEach(function (d) { if (d.data().choisi === true) choisis[d.id] = true; });
+        liste.forEach(function (item) {
+          item.article.classList.toggle("choisi", !!choisis[item.id]);
+        });
+      });
+    }
+ 
+    demarrer();
+  </script>
+
+</body>
+</html>
